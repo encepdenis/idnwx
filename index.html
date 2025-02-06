@@ -47,14 +47,33 @@
 			*/
 			
 			var map = L.map('map').setView([-6.25, 106.85], 10);
-
-			L.tileLayer('https://api.maptiler.com/maps/backdrop/256/{z}/{x}/{y}.png?key=iuh0dpGuYWzKRnfcFJXe', {
-			  attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+			
+			var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				maxZoom: 19,
+				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 			}).addTo(map);
 
-			L.marker([-6.25, 106.85]).addTo(map)
-			 .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-			 .openPopup();
+			var errorOverlayUrl = 'https://img.icons8.com/?size=100&id=j1UxMbqzPi7n&format=png&color=000000';
+			var img_radar1 = 'https://drive.usercontent.google.com/download?id=1dVuHacMd00K2_5W3vrDUPSO2deuQrP21';
+			&bbox=10255500,-1464000,16015500,936000
+			
+			var corner1 = L.latLng(10255500, -1464000);
+			var corner2 = L.latLng(16015500, 936000);
+			var latLngBounds = L.latLngBounds(corner1,corner2);
+			var imageOverlay = L.imageOverlay(img_radar1, latLngBounds, {
+				opacity: 0.8,
+				errorOverlayUrl: errorOverlayUrl,
+				alt: altText,
+				interactive: true
+			}).addTo(map);
+
+			// L.tileLayer('https://api.maptiler.com/maps/backdrop/256/{z}/{x}/{y}.png?key=iuh0dpGuYWzKRnfcFJXe', {
+			//   attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+			// }).addTo(map);
+
+			// L.marker([-6.25, 106.85]).addTo(map)
+			//  .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+			//  .openPopup();
 		</script>
 	</body>
 </html>
