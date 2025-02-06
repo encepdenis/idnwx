@@ -1,82 +1,72 @@
-<!DOCTYPE HTML>
-<html>
-  <head>
-		<meta charset="utf-8" />
-    <title>IDNwx</title>
 
-		<!-- include leaflet css and javascript -->
-		<link rel="stylesheet" crossorigin=""
-				href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-		<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"
-						crossorigin=""></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title> IDNwx </title>
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
 
-		<style type="text/css">
-			#map {
-			  height: 600px;
-			}
-		</style>
-	</head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-	<body>
-		<p>
-			This is the self-contained one-file-version for a
-			<a href="http://leafletjs.com/">leaflet</a> map.
-		</p>
-		<p>
-			The one important thing is that the #map div needs a <em>height</em>
-			to be visible.
-		</p>
-		<div id="map"></div>
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		.leaflet-container {
+			height: 600px;
+/* 			width: 600px; */
+			max-width: 100%;
+			max-height: 100%;
+		}
+	</style>
 
-		<script>
-			/*
-			the script mus be loaded after the map div is defined,
-			otherwise this will not work. Therefore the script is below
-			the div.
+	
+</head>
+<body>
+	
+	<p>
+		This is the self-contained one-file-version for a
+		<a href="http://leafletjs.com/">leaflet</a> map.
+	</p>
 
-			The source code below is the example from the leaflet start page.
-			*/
-			
-			var map = L.map('map').setView([-6.25, 106.85], 8);
-			
-			var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-				maxZoom: 19,
-				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-			}).addTo(map);
+<div id='map'></div>
 
-			var errorOverlayUrl = 'https://img.icons8.com/?size=100&id=j1UxMbqzPi7n&format=png&color=000000';
-			// var img_radar1 = 'https://drive.usercontent.google.com/download?id=1dVuHacMd00K2_5W3vrDUPSO2deuQrP21';
-			// var img_radar1 = 'https://drive.usercontent.google.com/download?id=1dVuHacMd00K2_5W3vrDUPSO2deuQrP21&authuser=0';
-			
-			// 'https://drive.google.com/file/d/1dVuHacMd00K2_5W3vrDUPSO2deuQrP21/view?usp=drive_link'
-			// 'https://drive.google.com/file/d/1dVuHacMd00K2_5W3vrDUPSO2deuQrP21/preview'
-			var img_radar1 = 'https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg';
-			
-			// &bbox=10255500,-1464000,16015500,936000
-			var latLngBounds = L.latLngBounds([
-				[8.378212665,143.869684328]
-				[-13.037352249,92.126723963],
-			]);
-			// var latLngBounds = L.latLngBounds([
-			// 	L.CRS.EPSG3857.unproject(L.point([10255500,-1464000])),
-			// 	L.CRS.EPSG3857.unproject(L.point([16015500,936000]))
-			// ]);
-			var imageOverlay = L.imageOverlay(img_radar1, latLngBounds, {
-				opacity: 0.8,
-				errorOverlayUrl: errorOverlayUrl,
-				alt: 'altText',
-				interactive: true
-			}).addTo(map);
+<script>
+	const map = L.map('map').setView([-6.25, 106.85], 8);
 
-			map.fitBounds(latLngBounds);
+	const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 15,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
 
-			// L.tileLayer('https://api.maptiler.com/maps/backdrop/256/{z}/{x}/{y}.png?key=iuh0dpGuYWzKRnfcFJXe', {
-			//   attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-			// }).addTo(map);
+	const imageUrl = 'https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg';
+	const errorOverlayUrl = 'https://cdn-icons-png.flaticon.com/512/110/110686.png';
+	const altText = 'Image of Newark, N.J. in 1922. Source: The University of Texas at Austin, UT Libraries Map Collection.';
+	
+	// const latLngBounds = L.latLngBounds([[40.799311, -74.118464], [40.68202047785919, -74.33]]);
+	var latLngBounds = L.latLngBounds([
+		[8.378212665,143.869684328]
+		[-13.037352249,92.126723963]
+	]);
 
-			// L.marker([-6.25, 106.85]).addTo(map)
-			//  .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-			//  .openPopup();
-		</script>
-	</body>
+	const imageOverlay = L.imageOverlay(imageUrl, latLngBounds, {
+		opacity: 0.8,
+		errorOverlayUrl,
+		alt: altText,
+		interactive: true
+	}).addTo(map);
+
+	L.rectangle(latLngBounds).addTo(map);
+	map.fitBounds(latLngBounds);
+</script>
+
+
+
+</body>
 </html>
