@@ -49,13 +49,14 @@
 			var img_radar1 = 'https://drive.google.com/file/d/1dVuHacMd00K2_5W3vrDUPSO2deuQrP21/preview';
 			
 			// &bbox=10255500,-1464000,16015500,936000
-			var corner1 = L.latLng(10255500, -1464000);
-			var corner2 = L.latLng(16015500, 936000);
-			var latLngBounds = L.latLngBounds(corner1,corner2);
 			var imgbounds = [
-				L.CRS.EPSG3857.unproject(L.point([10255500,-1464000])),
-				L.CRS.EPSG3857.unproject(L.point([16015500,936000]))
+				[92.126723963,-13.037352249],
+				[143.869684328,8.378212665]
 			];
+			// var imgbounds = [
+			// 	L.CRS.EPSG3857.unproject(L.point([10255500,-1464000])),
+			// 	L.CRS.EPSG3857.unproject(L.point([16015500,936000]))
+			// ];
 			var imageOverlay = L.imageOverlay(img_radar1, imgbounds, {
 				opacity: 0.8,
 				errorOverlayUrl: errorOverlayUrl,
