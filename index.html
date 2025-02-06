@@ -53,20 +53,22 @@
 			var img_radar1 = 'https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg';
 			
 			// &bbox=10255500,-1464000,16015500,936000
-			var imgbounds = L.latLngBounds([
+			var latLngBounds = L.latLngBounds([
 				[8.378212665,143.869684328]
 				[-13.037352249,92.126723963],
 			]);
-			// var imgbounds = L.latLngBounds([
+			// var latLngBounds = L.latLngBounds([
 			// 	L.CRS.EPSG3857.unproject(L.point([10255500,-1464000])),
 			// 	L.CRS.EPSG3857.unproject(L.point([16015500,936000]))
 			// ]);
-			var imageOverlay = L.imageOverlay(img_radar1, imgbounds, {
+			var imageOverlay = L.imageOverlay(img_radar1, latLngBounds, {
 				opacity: 0.8,
 				errorOverlayUrl: errorOverlayUrl,
 				alt: 'altText',
 				interactive: true
 			}).addTo(map);
+
+			map.fitBounds(latLngBounds);
 
 			// L.tileLayer('https://api.maptiler.com/maps/backdrop/256/{z}/{x}/{y}.png?key=iuh0dpGuYWzKRnfcFJXe', {
 			//   attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
