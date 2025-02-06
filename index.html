@@ -60,7 +60,11 @@
 			var corner1 = L.latLng(10255500, -1464000);
 			var corner2 = L.latLng(16015500, 936000);
 			var latLngBounds = L.latLngBounds(corner1,corner2);
-			var imageOverlay = L.imageOverlay(img_radar1, latLngBounds, {
+			var imgbounds = [
+				L.CRS.EPSG3857.unproject(L.point([10255500,-1464000])),
+				L.CRS.EPSG3857.unproject(L.point([16015500,936000]))
+			];
+			var imageOverlay = L.imageOverlay(img_radar1, imgbounds, {
 				opacity: 0.8,
 				errorOverlayUrl: errorOverlayUrl,
 				alt: altText,
