@@ -12,24 +12,15 @@
 
 		<style type="text/css">
 			#map {
-			  height: 800px;
+			  height: 600px;
 			}
 		</style>
 	</head>
 
 	<body>
-		<h1><a href="http://leafletjs.com/">Leaflet</a> example in one file</h1>
 		<p>
 			This is the self-contained one-file-version for a
 			<a href="http://leafletjs.com/">leaflet</a> map.
-			For a version with CSS and Javascript in different files see
-			<a href="index.html">index.html</a>. For a leaflet map without
-			Javascript programming try
-			<a href="https://lapizistik.github.io/leaflet-easymap/">Leasymap</a>.
-		</p>
-		<p>
-			Find the <a href="https://github.com/Lapizistik/leaflet-examples">source
-				code on Github</a>.
 		</p>
 		<p>
 			The one important thing is that the #map div needs a <em>height</em>
@@ -46,7 +37,7 @@
 			The source code below is the example from the leaflet start page.
 			*/
 			
-			var map = L.map('map').setView([-6.25, 106.85], 10, {crs: .CRS.EPSG3857});
+			var map = L.map('map').setView([-6.25, 106.85], 10);
 			
 			var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 				maxZoom: 19,
