@@ -46,7 +46,7 @@
 			The source code below is the example from the leaflet start page.
 			*/
 			
-			var map = L.map('map').setView([-6.25, 106.85], 10);
+			var map = L.map('map').setView([-6.25, 106.85], 10, {crs: .CRS.EPSG3857});
 			
 			var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 				maxZoom: 19,
