@@ -1,0 +1,26 @@
+name: Update Radar Data
+
+on:
+  schedule:
+    # - cron: "3,13,23,33,43,53 * * * *"  # Runs every 10 minutes when minutes contain "3"
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  update-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download the latest image from Google Drive
+        run: |
+          curl -L "https://drive.google.com/uc?export=download&id=1TaL2MayJm0iqbM-S9ffSCteEUcDM76bO" -o asstes/radar/radar_001.png
+
+      - name: Commit and Push the Updated Image
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add satellite.jpg
+          git commit -m "Updated radar data" || echo "No changes to commit"
+          git push
