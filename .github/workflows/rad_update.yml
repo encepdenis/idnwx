@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        
+      - name: Ensure Folder Exists
+        run: mkdir -p asstes/radar/  # Create 'sat/' directory if it doesn't exist
 
       - name: Download the latest image from Google Drive
         run: |
