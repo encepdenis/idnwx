@@ -1,7 +1,7 @@
 name: Update Radar Data
 
 on:
-  schedule:
+  # schedule:
     # - cron: "3,13,23,33,43,53 * * * *"  # Runs every 10 minutes when minutes contain "3"
   workflow_dispatch:  # Allows manual triggering
 
