@@ -59,7 +59,7 @@ jobs:
           
           # Loop through and download each image
           for name in "${!images[@]}"; do
-            curl -L "https://drive.google.com/uc?export=download&id=${images[$name]}" -o "assets/sat/${name}.png"
+            curl -L "https://drive.google.com/uc?export=download&id=${images[$name]}" -o "assets/radar/${name}.png"
           done
           
           # curl -L "https://drive.google.com/uc?export=download&id=1TaL2MayJm0iqbM-S9ffSCteEUcDM76bO" -o asstes/radar/radar_001.png
