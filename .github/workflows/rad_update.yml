@@ -2,7 +2,7 @@ name: Update Radar Data
 
 on:
   schedule:
-    - cron: "3,13,23,33,43,53 * * * *"  # Runs every 10 minutes when minutes contain "3"
+    - cron: "4,14,24,34,44,54 * * * *"  # Runs every 10 minutes when minutes contain "3"
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
@@ -16,54 +16,36 @@ jobs:
       - name: Ensure Folder Exists
         run: mkdir -p asstes/radar/  # Create directory if it doesn't exist
 
+      - name: Shift Existing Files
+        run: |
+          cd assets/radar/
+          
+          # Shift images from highest to lowest (radar_071 -> radar_072, etc.)
+          for i in {35..1}; do
+            j=$((i + 1))
+            if [ -f "radar_${i}.png" ]; then
+              mv "radar_${i}.png" "radar_${j}.png"
+            fi
+          done
+
       - name: Download the latest image from Google Drive
         run: |
           # Define image IDs and filenames
           declare -A images
-          images["radar_001"]="1TaL2MayJm0iqbM-S9ffSCteEUcDM76bO"
-          images["radar_002"]="1--4BrzZR85COMJD1yeUIjpi1Cb2_RWTG"
-          images["radar_003"]="1-4hxoXmMfnuK5rfweQ6gKhZeBDjjsja_"
-          images["radar_004"]="15gLqgZNa9A_tK4Fk9yaqGzHMMjZ38HN5"
-          images["radar_005"]="1o_8nC76svAiCaL3o1fyXWAcA9YUttG-r"
-          images["radar_006"]="1Ih5kGM0lXvk1WvgxinLRnCmewYUWsz0A"
-          images["radar_007"]="1XJlkxNsd47ENcAcoj42yMyB6Yrouitx3"
-          images["radar_008"]="17KQjVZVpRqnuzsHSLWqvA-avC9UZbPYo"
-          images["radar_009"]="1kD0WNm9Y2-4VVUymH2RnzA6D3lcBZ4zQ"
-          images["radar_010"]="1Qf5Qh9Qs21ts7XcBgs32mNG3Zzr6kvxl"
-          images["radar_011"]="1jzrWBtwr8t7o_fg16h7VZkzcKt9sW3FO"
-          images["radar_012"]="188yJUl_GcRDW7AGiXiug8YbzgDZe77g8"
-          images["radar_013"]="1ul1Jb6_w2TjHBIrG0HTOjPoW7oK_k30M"
-          images["radar_014"]="199KTbs8p9XaJIkEG4HaeypK7CClxAkFq"
-          images["radar_015"]="1z1QEqKakBB5sJfCqb_rlowpRKjA0BAWc"
-          images["radar_016"]="1fiamw5tTeIM8JlioS2tdYXKHUuWtaysR"
-          images["radar_017"]="1VTT12tN8bT70wGDnP9rWWJubJ4KYvyhX"
-          images["radar_018"]="1BCOTEm1703ebH1_evhYK7GugiKasAIGb"
-          images["radar_019"]="1Hnp82LtbX88g8VMlk90BtYVlqEm9rKJu"
-          images["radar_020"]="1A-npq1i6xVZWZ2Lu0LNr4NOTEeMSHlkh"
-          images["radar_021"]="1Psc5YzkKkTB14_vUMYYY17bAoxrmvVLJ"
-          images["radar_022"]="13CsQqZ8hWek3Mm9xF4tSsu759PMUoXC7"
-          images["radar_023"]="19OwpTo5Ko2rjsp1AzcW_DgX1pFRDxY9f"
-          images["radar_024"]="1xooT11fC5IjW6EE6eRGZu7-KDWVUsQBQ"
-          images["radar_025"]="1492eokfDmbcrXTGV65f6cJcLFvJffNwf"
-          images["radar_026"]="1CWSm7vCxUCZwOGxkdggKT0HMs5Wof-JW"
-          images["radar_027"]="12uj8Hmq3KtKx-K5LsgIROpTklvKAnUKc"
-          images["radar_028"]="1iVj_TRjcRwhFuC5V0gQLr_8dMzxhdpvD"
-          images["radar_029"]="1iefj1TNgh6zZxjy6T8S7NKzKvMrPHOWS"
-          images["radar_030"]="1OA9b0mv-QKJElmhK9xNY2O-qEpCbzaMD"
-          images["radar_031"]="1gUtVLCN2Upy_YNCT1DOEsPUfYDtbY1Nl"
-          images["radar_032"]="1xGcJ8MUBeRr1hUOELSzS-RcSM0E6dlul"
-          images["radar_033"]="137t3qrhOhN-sh0fPRnaLnpmZUI9EIHTl"
-          images["radar_034"]="1qNgmTjQ80r31sLl6IL6S2XQq6SzNl4DS"
-          images["radar_035"]="1dUOuNj03PCwA-7OIRlzXwKI9AdaNGD2o"
-          images["radar_036"]="1YGe1F8Q7dv2hp-OoTIOkWOLTn6IlsyIt"
+          # images["radar_001"]="1TaL2MayJm0iqbM-S9ffSCteEUcDM76bO"
+          # images["radar_002"]="1--4BrzZR85COMJD1yeUIjpi1Cb2_RWTG"
+          # images["radar_003"]="1-4hxoXmMfnuK5rfweQ6gKhZeBDjjsja_"
           
           # Loop through and download each image
-          for name in "${!images[@]}"; do
-            curl -L "https://drive.google.com/uc?export=download&id=${images[$name]}" -o "assets/radar/${name}.png"
-          done
+          # for name in "${!images[@]}"; do
+          #   curl -L "https://drive.google.com/uc?export=download&id=${images[$name]}" -o "assets/radar/${name}.png"
+          # done
           
-          # curl -L "https://drive.google.com/uc?export=download&id=1TaL2MayJm0iqbM-S9ffSCteEUcDM76bO" -o asstes/radar/radar_001.png
+          curl -L "https://drive.google.com/uc?export=download&id=1TaL2MayJm0iqbM-S9ffSCteEUcDM76bO" -o assets/radar/radar_001.png
 
+      - name: Check If Images Exist
+        run: ls -l assets/radar/  # Debugging step
+        
       - name: Commit and Push the Updated Image
         run: |
           git config --global user.name "github-actions"
